@@ -1,0 +1,17 @@
+{
+    "name": "cecos/quiz-game",
+    "description": "A simple quiz game with two types of questions",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Tsvetan",
+            "email": "tsvetan.y.petrov@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    }
+}

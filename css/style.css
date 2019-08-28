@@ -1,0 +1,48 @@
+.nav-link {
+    display: block;
+    padding: 8%;
+    text-align: center;
+    background: #444444;
+}
+
+.nav-tabs .nav-item {
+    width: 50%;
+    font-size: 50px;
+}
+
+.nav-tabs .nav-link.active{
+    background: #8A8A8A;
+}
+
+.tab-content{
+    padding: 1.5rem;
+}
+
+.question-header {
+    color: #8A8A8A;
+}
+
+.question-card{
+    background: #FF048C;
+    color: white;
+    font-size: 2rem;
+}
+
+.answers{
+    position: absolute;
+    bottom: 1rem;
+}
+
+.question-option {
+    font-size: 1.5rem;
+    background: #e3e3e3;
+    border-radius: 10px;
+    padding: 10px 10px 10px 40px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.question-option:hover {
+    transition: 200ms;
+    background: #c6c5c5;
+}
