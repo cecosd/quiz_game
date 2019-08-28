@@ -11,6 +11,7 @@ class DB
 
     public function instance()
     {
+        
         if (self::$instance === null)
         {
             $opt  = array(
