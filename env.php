@@ -1,9 +1,9 @@
 <?php
   $variables = [
       'DB_HOST' => 'localhost',
-      'DB_USER' => 'root',
+      'DB_USER' => '',
       'DB_PASS' => '',
-      'DB_NAME' => 'orm',
+      'DB_NAME' => '',
       'DB_CHAR' => 'utf8',
   ];
 
