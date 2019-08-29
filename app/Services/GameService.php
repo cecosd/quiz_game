@@ -4,19 +4,33 @@ namespace App\Services;
 
 use App\Database\DB;
 
+/**
+ * Service class for managing the Quiz Game
+ */
 class GameService
 {    
-    public function conn()
+    /**
+     * Connect to the database
+     *
+     * @return object
+     */
+    public function conn(): DB
     {
         return new DB();
     }
 
-    public function binaryMode()
+    /**
+     * Get questions and organize them for the binary style of game.
+     *
+     * @return array
+     */
+    public function binaryMode(): array
     {        
         $rows = $this->conn()
                     ->run("SELECT 
                                 * 
-                        FROM `questions` 
+                        FROM `questions`
+                        ORDER BY RAND() 
                             LIMIT 10")
                     ->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -26,10 +40,18 @@ class GameService
             $questions[$row['id']] = $row;
         }
 
-        return $questions;           
+        $response['data'] = array_values($questions);
+        $response['total'] = count($response['data']);
+
+        return $response;          
     } 
 
-    public function optionalMode()
+    /**
+     * Get questions and organize them for the optional style of game.
+     *
+     * @return array
+     */
+    public function optionalMode(): array
     {                
         $rows = $this->conn()
                     ->run("SELECT 
@@ -56,12 +78,22 @@ class GameService
             }
         }
 
-        return $questions;
+        $response['data'] = array_values($questions);
+        $response['total'] = count($response['data']);
+
+        return $response;   
 
     } 
 
-    public function store($data)
+    /**
+     * Add questions to the database from the administration panel
+     *
+     * @param array $data
+     * @return void
+     */
+    public function store(array $data)
     {                       
+        // Store the question
         $question = $this->conn()
             ->run("INSERT INTO 
                     questions
@@ -72,9 +104,11 @@ class GameService
                         'is_correct' => $data['is_correct'],
                     ]);
 
+        // Get last inserted ID
         $stmt = $this->conn()->run("SELECT LAST_INSERT_ID()");
         $id = $stmt->fetchColumn();
 
+        // Create options for this question
         $options = $this->conn()
             ->run("INSERT INTO 
                     options

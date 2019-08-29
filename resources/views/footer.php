@@ -10,7 +10,7 @@ const app = new Vue({
     data: {
         game_mode: 'binary',
         questions: [],
-        current_index: 1,
+        current_index: 0,
         max_questions: null,
         total_correct: 0,
         total_incorrect: 0,
@@ -19,6 +19,7 @@ const app = new Vue({
     watch: {
         game_mode: function(mode) {
             this.newGame();
+            $('.nav-tabs a[href="#game"]').tab('show');
         }
     },
     computed: {
@@ -38,8 +39,8 @@ const app = new Vue({
             axios
                 .get(link)
                 .then(response => {
-                    this.questions = response.data;   
-                    this.max_questions = Object.keys(this.questions).length;
+                    this.questions = response.data.data;   
+                    this.max_questions = response.data.total;
                 });
         },
         submitBinaryAnswer: function(answer){
@@ -63,7 +64,7 @@ const app = new Vue({
             this.manageModals();
         },
         nextQuestion: function(){  
-            if(Object.keys(this.questions).length < this.current_index + 1 ){
+            if(this.max_questions == this.current_index + 1 ){
                 this.showStatisticsModal();
                 this.hideAnswerModal();
             }else{
@@ -77,7 +78,7 @@ const app = new Vue({
             this.resetGame();
         },
         resetGame: function(){
-            this.current_index = 1;
+            this.current_index = 0;
             this.total_correct = 0;
             this.total_incorrect = 0;
             this.answer_correct = null;
