@@ -15,7 +15,7 @@ This will start the routing system
 
 Development workflow:
 
-1. Finding a working structure of the database;
+1. Finding a working structure of the database. The relation between QUESTIONS and OPTIONS is oneToMany by OPTIONS.QUESTION_ID = QUESTIONS.ID
 2. Creating the App\Database\DB::class connector using PHP PDO(PHP Data Object) with connection data from the ENV.php file.
 3. Creating the App\Services\GameRervice::class for managing the databse fetching and forming the response data for the front end;
 4. Creating a basic routing system for managing the API requests in the application. Code inspiration from:
